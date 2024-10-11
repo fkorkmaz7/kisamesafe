@@ -2,12 +2,13 @@ const express = require('express');
 const Araba = require('../models/araba');
 const router = express.Router();
 
-router.route('/getir').get(async (req, res, next) => {
+
+router.route('/').get(async (req, res, next) => {
     const arabalar = await Araba.find();
     return res.status(200).send(arabalar);
 })
 
-router.route('/ekle').post(async (req,res,next) => {
+router.route('/').post(async (req,res,next) => {
     const yeni_araba = await Araba.create(req.body);
     res.send(yeni_araba);
 });

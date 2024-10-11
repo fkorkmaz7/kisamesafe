@@ -19,4 +19,6 @@ const updateArabaFiyat = async (id, fiyat) => {
     return updateAraba;
 }
 
+
+
 module.exports = {delAraba,updateArabaFiyat};

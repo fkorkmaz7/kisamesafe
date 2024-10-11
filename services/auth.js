@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const Alici = requre("../models/alici.js");
+const Alici = require("../models/alici.js");
 
 const signIn =  async (req, res, next) => {
     const { id } = req.params;

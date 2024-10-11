@@ -4,7 +4,7 @@ const { signIn,signUp } = require('../services/auth');
 const router = express.Router();
 
 
-router.route('/getir').get(async (req, res, next) => {
+router.route('/').get(async (req, res, next) => {
     const alicilar = await Alici.find();
     return res.status(200).send(alicilar);
 })
