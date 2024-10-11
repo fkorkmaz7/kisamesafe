@@ -1,30 +1,43 @@
 const jwt = require("jsonwebtoken");
+const Alici = requre("../models/alici.js");
 
+const signIn =  async (req, res, next) => {
+    const { id } = req.params;
+    const { ad_soyad, butce, parola, tel_no} = req.body
+    const alici = await Alici.findByIdAndUpdate(id, {//crate degistir
+        ad_soyad,
+        butce,
+        parola,
+        tel_no
+    }, { new: true });
+    return res.status(200).send(alici);
+}
 
-const signIn = async (body) => {
-  const ad_soyad = body.ad_soyad;
-  const parola = body.parola;
-  const butce = body.butce;
-  const tel_no = body.tel_no;
+const signUp = async (body) => {
+    const tel_no = body.tel_no;
+    const parola = body.parola;
 
+    const alici = await Alici.findOne({ tel_no: tel_no });
+        
+  
+    if (alici.parola === parola){
+      return generateToken(username);//
+    } else {
+      console.log("buraya giriyor mu ?");
+      return "giriş yapamadı, kullanıcı hatalı şifre veya kullancıı adı";
+    }
+  };
 
-
-
-
-  if (ad_soyad === "mustafa" && parola === "123") {
-    return generateToken(ad_soyad);
-  } else {
-    console.log("buraya giriyor mu ?");
-    return "giriş yapamadı, kullanıcı hatalı şifre veya kullancıı adı";
-  }
-};
 
 const generateToken = (ad_soyad) => {
   const token = jwt.sign({ istedigim: "buydu",buyuyecek:"veri" ,buyuyecekd:"veri" }, "cokgizli",{expiresIn:'2d'});
   return token;
 };
 
-module.exports = { signIn };
+module.exports = { 
+    signIn ,
+    signUp,
+};
 
 
 // ad_soyad : {type: String},

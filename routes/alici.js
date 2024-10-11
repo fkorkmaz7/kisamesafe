@@ -1,6 +1,8 @@
 const express = require('express');
 const Alici = require('../models/alici');
+const { signIn,signUp } = require('../services/auth');
 const router = express.Router();
+
 
 router.route('/getir').get(async (req, res, next) => {
     const alicilar = await Alici.find();
@@ -18,16 +20,6 @@ router.route('/:id').delete(async (req, res, next) => {
     return res.status(200).send(alici);
 })
 
-router.route('/:id').put(async (req, res, next) => {
-    const { id } = req.params;
-    const { ad_soyad, butce, parola, tel_no} = req.body
-    const alici = await Alici.findByIdAndUpdate(id, {
-        ad_soyad,
-        butce,
-        parola,
-        tel_no
-    }, { new: true });
-    return res.status(200).send(alici);
-});
+router.route('/:id').put(signUp);
 
 module.exports = router;
