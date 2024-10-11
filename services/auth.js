@@ -20,8 +20,8 @@ const signUp = async (body) => {
     const alici = await Alici.findOne({ tel_no: tel_no });
         
   
-    if (alici.parola === parola){
-      return generateToken(username);//
+    if (alici?.parola === parola){
+      return generateToken(tel_no);//
     } else {
       console.log("buraya giriyor mu ?");
       return "giriş yapamadı, kullanıcı hatalı şifre veya kullancıı adı";
@@ -29,8 +29,11 @@ const signUp = async (body) => {
   };
 
 
-const generateToken = (ad_soyad) => {
+const generateToken = (tel_no) => {
+
   const token = jwt.sign({ istedigim: "buydu",buyuyecek:"veri" ,buyuyecekd:"veri" }, "cokgizli",{expiresIn:'2d'});
+  console.log("girdi");
+  
   return token;
 };
 

@@ -2,12 +2,12 @@ const express = require('express');
 const Fatura = require('../models/fatura');
 const router = express.Router();
 
-router.route('/getir').get(async (req, res, next) => {
+router.route('/').get(async (req, res, next) => {
     const faturalar = await Fatura.find();
     return res.status(200).send(faturalar);
 })
 
-router.route('/ekle').post(async (req,res,next) => {
+router.route('/').post(async (req,res,next) => {
     const yeni_fatura = await Fatura.create(req.body);
     res.send(yeni_fatura);
 });
